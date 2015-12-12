@@ -48,21 +48,6 @@ nc='\e[0m'
 #export http_proxy HTTP_PROXY
 
 #------------------------------------------////
-# Aliases:
-#------------------------------------------////
-alias yrootname='echo $YROOT_NAME'
-alias screens='screen -list'
-alias logs='cd /home/y/logs/yapache/'
-alias conf='cd /home/y/conf/'
-alias pub='ssh pub01.psi.corp.sp1.yahoo.com'
-alias yphp='/home/y/bin/php'
-alias errorlog='tail -f /home/y/logs/yapache/error'
-alias colordiff '/home/y/bin/colordiff.pl'
-alias openstack_vipng='ssh gettingletting.corp.ne1.yahoo.com'
-alias colordiff='/home/y/bin/colordiff'
-alias gitupdate='/home/ranjithk/git_update.sh'
-
-#------------------------------------------////
 # Functions and Scripts:
 #------------------------------------------////
 
