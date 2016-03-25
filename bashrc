@@ -181,11 +181,6 @@ local cur prev opts base
 complete -F __hostAutoComplete ssh
 complete -F __hostAutoComplete yssh
 complete -F __screenAutoComplete screen
-if [ -f /home/y/etc/yroot/yroot.bashrc ]; then
-   . /home/y/etc/yroot/yroot.bashrc
-fi
-set -o ignoreeof
-export PATH=$PATH:/home/y/bin/
 
 #### SQL default settings
 export SQLPATH=/home/ranjithk/sql/login.sql
