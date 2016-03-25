@@ -1,10 +1,5 @@
 #!/bin/bash
 #------------------------------------------////
-# Source oracle conf file
-#------------------------------------------////
-source /home/y/bin/oracle_env.sh
-
-#------------------------------------------////
 # Grep options - to exclude svn directories in search
 #------------------------------------------////
 export GREP_OPTIONS="--color"
