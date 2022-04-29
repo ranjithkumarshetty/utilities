@@ -52,8 +52,6 @@ export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 export HISTCONTROL=ignoreboth
 
-export JAVA_HOME=/usr/bin/java
-
 ##WOOT!
 
 localnet ()
@@ -126,13 +124,15 @@ git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
+function _ps1_prompt () {
+	if [[ -n $(git_branch) ]] ; then
+    		PS1='\[\033[01;32m\]\u\[\033[01;35m\]@\h\[\033[01;34m\]\[\033[00;34m\]{\[\033[01;34m\]\w\[\033[00;34m\]}\[\033[01;32m\]\033[00;32m\]($(git_branch))\[\033[00m\]:'
+	else
+    		PS1='\[\033[01;32m\]\u\[\033[01;35m\]@\h\[\033[01;34m\]\[\033[00;34m\]{\[\033[01;34m\]\w\[\033[00;34m\]}\[\033[01;32m\]:\[\033[00m\]'
+	fi
+}
 
-if [ $(git_branch) == "" ] ; then
-    PS1='\[\033[01;32m\]\u\[\033[01;35m\]@\h\[\033[01;34m\]\[\033[00;34m\]{\[\033[01;34m\]\w\[\033[00;34m\]}\[\033[01;32m\]:\[\033[00m\]'
-else
-    PS1='\[\033[01;32m\]\u\[\033[01;35m\]@\h\[\033[01;34m\]\[\033[00;34m\]{\[\033[01;34m\]\w\[\033[00;34m\]}\[\033[01;32m\]\033[00;32m\]($(git_branch))\[\033[00m\]:'
-fi
-
+PROMPT_COMMAND=_ps1_prompt
 #------------------------------------------////
 # System Information:
 #------------------------------------------////
