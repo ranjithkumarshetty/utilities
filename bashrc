@@ -52,8 +52,7 @@ export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 export HISTCONTROL=ignoreboth
 
-export JAVA_HOME=/home/y/libexec/java/jre/
-export PATH=/home/y/libexec/java/jre/bin/:$PATH 
+export JAVA_HOME=/usr/bin/java
 
 ##WOOT!
 
@@ -121,34 +120,17 @@ fi
 }
 
 #------------------------------------------////
-# Some default .bashrc contents:
-#------------------------------------------////
-
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
-# don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=ignoredups
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-#------------------------------------------////
 # Prompt:
 #------------------------------------------////
+git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
 
-if [ "$YROOT_NAME" == "" ] ; then
+
+if [ $(git_branch) == "" ] ; then
     PS1='\[\033[01;32m\]\u\[\033[01;35m\]@\h\[\033[01;34m\]\[\033[00;34m\]{\[\033[01;34m\]\w\[\033[00;34m\]}\[\033[01;32m\]:\[\033[00m\]'
 else
-    OS_IN_YROOT=$(echo $YROOT_NAME | cut -c -6);
-    APPLICATION=$(echo $YROOT_NAME | cut -c 7-9);
-    VER_ENV=$(echo $YROOT_NAME | cut -c 10-);
-    PS1='\[\033[01;32m\]\u\[\033[01;35m\]@\h\[\033[01;34m\]\[\033[01;36m\](${OS_IN_YROOT}\[\033[01;31m\]${APPLICATION}\[\033[01;36m\]${VER_ENV})(\[\033[00;34m\]{\[\033[01;34m\]\w\[\033[00;34m\]}\[\033[01;32m\]:\[\033[00m\]'
+    PS1='\[\033[01;32m\]\u\[\033[01;35m\]@\h\[\033[01;34m\]\[\033[00;34m\]{\[\033[01;34m\]\w\[\033[00;34m\]}\[\033[01;32m\]\033[00;32m\]($(git_branch))\[\033[00m\]:'
 fi
 
 #------------------------------------------////
@@ -156,7 +138,6 @@ fi
 #------------------------------------------////
 
 clear
-echo -ne "${cyan}";upinfo;echo ""
 __hostAutoComplete()
 {
 local cur prev opts base
@@ -183,7 +164,11 @@ complete -F __hostAutoComplete yssh
 complete -F __screenAutoComplete screen
 
 #### SQL default settings
-export SQLPATH=/home/ranjithk/sql/login.sql
 export MAVEN_OPTS='-Xms256m -Xmx1024m -XX:MaxPermSize=512m'
 export JAVA_OPTS='-Xms256m -Xmx1024m -XX:MaxPermSize=512m'
 export LC_ALL="en_GB.utf8"
+
+
+#### Aliases
+alias st="cd /Users/rshetty/Projects/stash"
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
